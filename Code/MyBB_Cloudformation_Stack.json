@@ -761,7 +761,7 @@
             },
 
             "sources" : {
-              "/tmp/mybb-aws-deployment" : "https://github.com/rodrigoosg/mybb-aws-deployment/tarball/master"
+              "/tmp/mybb-aws-deployment" : "https://github.com/atul-shimpi/cloudify-mybb"
             },
 
             "files" : {

@@ -31,7 +31,7 @@
     },
 
     "AdministratorEmail": {
-      "Default": "administrator@your-email-domain.com",
+      "Default": "shimpiatul.com",
       "Description": "E-Mail address to notify for autoscaling operations in course.",
       "Type": "String",
       "AllowedPattern": "([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)",
@@ -761,7 +761,7 @@
             },
 
             "sources" : {
-              "/tmp/mybb-aws-deployment" : "https://github.com/rodrigoosg/mybb-aws-deployment/tarball/master"
+              "/tmp/mybb-aws-deployment" : "https://github.com/atul-shimpi/cloudify-mybb"
             },
 
             "files" : {
