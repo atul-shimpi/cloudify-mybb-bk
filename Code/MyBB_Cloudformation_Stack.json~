@@ -31,7 +31,7 @@
     },
 
     "AdministratorEmail": {
-      "Default": "shimpiatul.com",
+      "Default": "shimpiatul@hotmail.com",
       "Description": "E-Mail address to notify for autoscaling operations in course.",
       "Type": "String",
       "AllowedPattern": "([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)",
@@ -66,12 +66,12 @@
 
     "DBPassword": {
       "NoEcho": "true",
-      "Description" : "The database admin account password",
+      "Description" : "The database admin account password. Should be mininum 8 characters long.",
       "Type": "String",
-      "MinLength": "1",
+      "MinLength": "8",
       "MaxLength": "41",
       "AllowedPattern" : "[a-zA-Z0-9]+",
-      "ConstraintDescription" : "must contain only alphanumeric characters."
+      "ConstraintDescription" : "must contain only alphanumeric characters"
     },
 
     "DBAllocatedStorage": {
@@ -761,7 +761,7 @@
             },
 
             "sources" : {
-              "/tmp/mybb-aws-deployment" : "https://github.com/atul-shimpi/cloudify-mybb"
+              "/tmp/mybb-aws-deployment" : "https://github.com/atul-shimpi/cloudify-mybb/tarball/master"
             },
 
             "files" : {
