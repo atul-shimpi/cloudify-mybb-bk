@@ -1,0 +1,64 @@
+{
+    "Parameters": [
+        {
+            "ParameterKey": "KeyName", 
+            "ParameterValue": "mybb-key", 
+            "UsePreviousValue": true
+        },
+        {
+            "ParameterKey": "SSHLocation", 
+            "ParameterValue": "0.0.0.0/0", 
+            "UsePreviousValue": true
+        },
+        {
+            "ParameterKey": "WebServerInstanceType", 
+            "ParameterValue": "t2.micro", 
+            "UsePreviousValue": true
+        },
+        {
+            "ParameterKey": "AdministratorEmail", 
+            "ParameterValue": "administrator@your-email-domain.com", 
+            "UsePreviousValue": true
+        },
+        {
+            "ParameterKey": "WebServerCount", 
+            "ParameterValue": "1", 
+            "UsePreviousValue": true
+        },
+        {
+            "ParameterKey": "DBName", 
+            "ParameterValue": "MyBBDatabase", 
+            "UsePreviousValue": true
+        },
+        {
+            "ParameterKey": "DBUser", 
+            "ParameterValue": "rdsuser", 
+            "UsePreviousValue": true
+        },
+        {
+            "ParameterKey": "DBPassword", 
+            "ParameterValue": "youdbpassword", 
+            "UsePreviousValue": true
+        },
+        {
+            "ParameterKey": "DBAllocatedStorage", 
+            "ParameterValue": "5", 
+            "UsePreviousValue": true
+        },
+        {
+            "ParameterKey": "DBInstanceClass", 
+            "ParameterValue": "db.t1.micro", 
+            "UsePreviousValue": true
+        },
+        {
+            "ParameterKey": "DBPort", 
+            "ParameterValue": "3306", 
+            "UsePreviousValue": true
+        },
+        {
+            "ParameterKey": "MultiAZ", 
+            "ParameterValue": "true", 
+            "UsePreviousValue": true
+        }
+    ]
+}
