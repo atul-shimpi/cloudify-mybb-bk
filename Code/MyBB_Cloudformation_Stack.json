@@ -41,7 +41,7 @@
     "WebServerCount" : {
       "Description" : "Number of EC2 instances to launch for the WebServer server",
       "Type" : "Number",
-      "Default" : "1"
+      "Default" : "2"
     },
 
     "DBName": {
@@ -428,7 +428,7 @@
     "PrivateSubnetA" : {
       "Type" : "AWS::EC2::Subnet",
       "Properties" : {
-        "AvailabilityZone" : { "Fn::Select" : [ "2", { "Fn::GetAZs" : "" } ] },
+        "AvailabilityZone" : { "Fn::Join" : [ "", [ { "Ref" : "AWS::Region" }, "a" ] ] },
         "CidrBlock" : { "Fn::FindInMap" : [ "SubnetConfig", "PrivateA", "CIDR" ]},
         "VpcId" : { "Ref" : "VPC" },
         "Tags" : [
@@ -441,7 +441,7 @@
     "PrivateSubnetB" : {
       "Type" : "AWS::EC2::Subnet",
       "Properties" : {
-        "AvailabilityZone" : { "Fn::Select" : [ "3", { "Fn::GetAZs" : "" } ] },
+        "AvailabilityZone" : { "Fn::Join" : [ "", [ { "Ref" : "AWS::Region" }, "b" ] ] },
         "CidrBlock" : { "Fn::FindInMap" : [ "SubnetConfig", "PrivateB", "CIDR" ]},
         "VpcId" : { "Ref" : "VPC" },
         "Tags" : [
