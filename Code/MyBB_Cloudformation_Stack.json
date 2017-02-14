@@ -792,16 +792,16 @@
 
             "commands": {
               "install": {
-                "command": "/bin/bash ./Code/deploy-mybb.sh",
+                "command": "/bin/bash ./code/deploy-mybb.sh",
                 "cwd": "/tmp/cloudify-mybb",
                 "env": {
-                  "CNF_PARAM_DBNAME": { "Ref": "DBName" },
-                  "CNF_PARAM_DBUSERNAME": { "Ref": "DBUser" },
-                  "CNF_PARAM_DBPASSWORD": { "Ref": "DBPassword" },
-                  "CNF_PARAM_DBHOSTNAME": { "Fn::GetAtt": [ "MySQLDatabase", "Endpoint.Address" ] },
-                  "CNF_PARAM_DBPORT": { "Ref": "DBPort" },                  
-                  "CNF_PARAM_DOMAINNAME": { "Fn::GetAtt": [ "PublicElasticLoadBalancer", "DNSName" ] },
-                  "CNF_PARAM_ADMINEMAIL": { "Ref": "AdministratorEmail" }
+                  "DB_NAME": { "Ref": "DBName" },
+                  "DB_USER_NAME": { "Ref": "DBUser" },
+                  "DB_PASSWORD": { "Ref": "DBPassword" },
+                  "DB_HOST_NAME": { "Fn::GetAtt": [ "MySQLDatabase", "Endpoint.Address" ] },
+                  "DB_PORT": { "Ref": "DBPort" },                  
+                  "DOMAIN_NAME": { "Fn::GetAtt": [ "PublicElasticLoadBalancer", "DNSName" ] },
+                  "ADMIN_EMAIL": { "Ref": "AdministratorEmail" }
                 }
               }
             },

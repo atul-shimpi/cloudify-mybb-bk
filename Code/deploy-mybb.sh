@@ -1,41 +1,29 @@
 #!/bin/bash
 
-#
-# Instalation script for MYBB
-#
+# extract mybb and copy it to install directory
+INSTALL_DIR="/var/www/html"
 
-# Configuration variables
-CONFIG="./Code"
-MYBB_PACKAGE="./Code/mybb_1809.zip"
-DEPLOYMENT_DIR="/var/www/html"
+rm -rf "$INSTALL_DIR"/*
+unzip "./code/mybb_1809.zip"
+cp -r ./Upload/* "$INSTALL_DIR"/
 
-# Assert that apache deployment dir is clean
-rm -rf "$DEPLOYMENT_DIR"/*
+# Configure mybb with parameters passed from command line
+CODE_DIR="./code"
+sed -e "s/MYBB_ADMINEMAIL/${ADMIN_EMAIL}/g" -e "s/MYBB_DOMAINNAME/${DOMAIN_NAME}/g" "${CODE_DIR}/settings.php" > "${INSTALL_DIR}/inc/settings.php"
+sed -e "s/MYBB_DBNAME/${DB_NAME}/g" -e "s/MYBB_DBUSERNAME/${DB_USER_NAME}/g" -e "s/MYBB_DBPASSWORD/${DB_PASSWORD}/g" \
+    -e "s/MYBB_DBHOSTNAME/${DB_HOST_NAME}/g" -e "s/MYBB_DBPORT/${DB_PORT}/g" "${CODE_DIR}/config.php" > "${INSTALL_DIR}/inc/config.php"
 
-# Unzip MYBB installation files inside apache deployment dir
-unzip "$MYBB_PACKAGE"
+# Configure database
+sed -e "s/MYBB_ADMINEMAIL/${ADMIN_EMAIL}/g" -e "s/MYBB_DOMAINNAME/${DOMAIN_NAME}/g" "${CODE_DIR}/mybb.sql" 
 
-# Copy extracted files into installation directory
-cp -r ./Upload/* "$DEPLOYMENT_DIR"/
+# populate database
+mysql --user="$DB_USER_NAME" --password="$DB_PASSWORD" --host="$DB_HOST_NAME" --port="$DB_PORT" --database="$DB_NAME" < "${CONFIG}/mybb.sql" || echo "Schema Already Exists!"
 
-# Replace variables in prepared configuration files
-sed -e "s/MYBB_ADMINEMAIL/${CNF_PARAM_ADMINEMAIL}/g" -e "s/MYBB_DOMAINNAME/${CNF_PARAM_DOMAINNAME}/g" "${CONFIG}/settings.php" > "${DEPLOYMENT_DIR}/inc/settings.php"
-
-sed -e "s/MYBB_DBNAME/${CNF_PARAM_DBNAME}/g" -e "s/MYBB_DBUSERNAME/${CNF_PARAM_DBUSERNAME}/g" -e "s/MYBB_DBPASSWORD/${CNF_PARAM_DBPASSWORD}/g" \
-    -e "s/MYBB_DBHOSTNAME/${CNF_PARAM_DBHOSTNAME}/g" -e "s/MYBB_DBPORT/${CNF_PARAM_DBPORT}/g" "${CONFIG}/config.php" > "${DEPLOYMENT_DIR}/inc/config.php"
-
-# Configure database with ADMIN and DOMAIN variables
-sed -e "s/MYBB_ADMINEMAIL/${CNF_PARAM_ADMINEMAIL}/g" -e "s/MYBB_DOMAINNAME/${CNF_PARAM_DOMAINNAME}/g" "${CONFIG}/mybb.sql" 
-
-# Load configured DUMP file into RDS database
-mysql --user="$CNF_PARAM_DBUSERNAME" --password="$CNF_PARAM_DBPASSWORD" --host="$CNF_PARAM_DBHOSTNAME" --port="$CNF_PARAM_DBPORT" --database="$CNF_PARAM_DBNAME" < "${CONFIG}/mybb.sql" || echo "Schema Already Exists!"
-
-# Set proper ownership and permissions.
-cd "$DEPLOYMENT_DIR"
+# Set permissions
+cd "$INSTALL_DIR"
 chmod 666 inc/config.php inc/settings.php
 chmod 666 inc/languages/english/*.php inc/languages/english/admin/*.php
 chmod 777 cache/ cache/themes/ uploads/ uploads/avatars/
 chmod 777 cache/ cache/themes/ uploads/ uploads/avatars/ admin/backups/
 
-# Remove install directory
-rm -rf /var/www/html/install
+# Thats all
